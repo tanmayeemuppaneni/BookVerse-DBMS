@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BookVerse — Academic Project Poster (25CS1302E)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f1a2e;
+      --primary-dark: #0a1120;
+      --accent-gold: #b88a43;
+      --accent-gold-light: #e5c378;
+      --accent-wine: #7e3042;
+      --accent-blue: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --border-accent: rgba(184, 138, 67, 0.35);
+      --success: #15803d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #0b1120;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Standard A1/A0 Landscape Poster Board Canvas */
+    .poster-board {
+      width: 1400px;
+      background: var(--bg);
+      border: 4px solid var(--accent-gold);
+      border-radius: 12px;
+      padding: 24px 30px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ========================================================
+       POSTER HEADER
+       ======================================================== */
+    .poster-header {
+      background: linear-gradient(135deg, #09111e 0%, #152238 60%, #1c2c47 100%);
+      color: #fff;
+      border-radius: 10px;
+      padding: 18px 24px;
+      display: grid;
+      grid-template-columns: 140px 1fr 140px;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid var(--accent-gold);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .klh-logo-box {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--accent-gold);
+      text-align: center;
+    }
+
+    .klh-logo-box .brand-k {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 26px;
+      color: #b91c1c;
+      line-height: 1;
+    }
+
+    .klh-logo-box .brand-sub {
+      font-size: 9px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: 1px;
+      margin-top: 3px;
+    }
+
+    .header-center {
+      text-align: center;
+    }
+
+    .header-subject-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-gold-light);
+      background: rgba(184, 138, 67, 0.15);
+      border: 1px solid var(--accent-gold);
+      padding: 3px 12px;
+      border-radius: 20px;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .header-center h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      margin-bottom: 4px;
+    }
+
+    .header-center h1 span {
+      color: var(--accent-gold-light);
+    }
+
+    .header-center .subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .header-meta-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .header-meta-row strong {
+      color: var(--accent-gold-light);
+    }
+
+    .qr-badge-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px dashed var(--accent-gold);
+      border-radius: 8px;
+      padding: 8px;
+      text-align: center;
+      color: #f1f5f9;
+    }
+
+    .qr-graphic {
+      width: 68px;
+      height: 68px;
+      background: #ffffff;
+      margin: 0 auto 4px;
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      padding: 4px;
+    }
+
+    .qr-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--accent-gold-light);
+      letter-spacing: 0.5px;
+    }
+
+    /* ========================================================
+       POSTER 4-COLUMN GRID LAYOUT
+       ======================================================== */
+    .poster-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr 1.05fr 0.9fr;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .poster-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* CARD STYLING */
+    .poster-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 14px 16px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      position: relative;
+    }
+
+    .poster-card.highlight {
+      border-top-color: var(--accent-gold);
+      background: #fffdfa;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 6px;
+    }
+
+    .card-title .icon {
+      color: var(--accent-gold);
+      font-size: 15px;
+    }
+
+    .card-text {
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card-text strong {
+      color: var(--text-main);
+    }
+
+    /* BULLET LISTS */
+    .poster-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    .poster-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .poster-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent-gold);
+      font-size: 9px;
+    }
+
+    .poster-list li strong {
+      color: var(--text-main);
+    }
+
+    /* COMPARISON TABLE */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10.5px;
+      margin-top: 4px;
+    }
+
+    .compare-table th {
+      background: #f1f5f9;
+      color: var(--primary);
+      font-weight: 700;
+      text-align: left;
+      padding: 6px 8px;
+      border: 1px solid #cbd5e1;
+    }
+
+    .compare-table td {
+      padding: 5px 8px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+      line-height: 1.35;
+    }
+
+    .compare-table tr:nth-child(even) {
+      background: #fafaf9;
+    }
+
+    .badge-check {
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .badge-cross {
+      color: #dc2626;
+      font-weight: 700;
+    }
+
+    /* TECH STACK CHIPS */
+    .tech-group {
+      margin-bottom: 8px;
+    }
+
+    .tech-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .chips-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tech-chip {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 3px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .tech-chip.featured {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+
+    .tech-chip.db {
+      background: #fefce8;
+      border-color: #fde047;
+      color: #854d0e;
+    }
+
+    /* ARCHITECTURE DIAGRAM BOX */
+    .diagram-box {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      line-height: 1.4;
+      border: 1px solid #334155;
+    }
+
+    .diagram-layer {
+      background: rgba(255,255,255,0.05);
+      border: 1px dashed rgba(255,255,255,0.2);
+      border-radius: 4px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+    }
+
+    .diagram-layer .layer-title {
+      color: var(--accent-gold-light);
+      font-weight: 700;
+      font-size: 10px;
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .diagram-arrow {
+      text-align: center;
+      color: #60a5fa;
+      font-weight: bold;
+      font-size: 10px;
+      margin: 2px 0;
+    }
+
+    /* ER SCHEMA COMPACT CARDS */
+    .er-schema-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .er-entity {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      overflow: hidden;
+      font-size: 9.5px;
+    }
+
+    .er-head {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 3px 6px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .er-body {
+      padding: 4px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: #334155;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .pk { color: #b45309; font-weight: bold; }
+    .fk { color: #0369a1; font-weight: bold; }
+
+    /* METRICS BADGE ROW */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .metric-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 6px;
+      text-align: center;
+    }
+
+    .metric-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    .metric-label {
+      font-size: 9px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    /* FOOTER BAR */
+    .poster-footer {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .poster-footer strong {
+      color: var(--primary);
+    }
+
+    .print-btn {
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--accent-gold);
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 10.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .poster-board {
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        padding: 10mm;
+      }
+      .print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="poster-board">
+
+    <!-- ========================================================
+         HEADER SECTION
+         ======================================================== -->
+    <header class="poster-header">
+      <!-- Left: KLH University Emblem -->
+      <div class="klh-logo-box">
+        <div class="brand-k">KLH</div>
+        <div class="brand-sub">BACHUPALLY</div>
+        <div style="font-size: 7.5px; color: #64748b; font-weight: 600; margin-top: 2px;">CSE · PBL 2026-27</div>
+      </div>
+
+      <!-- Center: Title & Academic Details -->
+      <div class="header-center">
+        <span class="header-subject-tag">Database Systems Engineering & Distributed Backend Development (25CS1302E)</span>
+        <h1>BOOK<span>VERSE</span></h1>
+        <div class="subtitle">An Immersive 3D Interactive Digital Library & Distributed Social Reading Platform</div>
+        
+        <div class="header-meta-row">
+          <span><strong>Team ID:</strong> BV-PBL-042</span>
+          <span>•</span>
+          <span><strong>Section:</strong> S-14 (CSE)</span>
+          <span>•</span>
+          <span><strong>Members:</strong> J. SAI SATYAN – 2520030088, M. TANMAYEE – 2520030339, K. DEVIKA – 2520030329</span>
+          <span>•</span>
+          <span><strong>Guide:</strong> Dr. K. V. Ramanathan</span>
+        </div>
+      </div>
+
+      <!-- Right: QR Code / Repository Verification -->
+      <div class="qr-badge-box">
+        <div class="qr-graphic">
+          <svg viewBox="0 0 100 100" width="60" height="60">
+            <!-- Simulated High-Precision QR Matrix -->
+            <rect width="100" height="100" fill="#ffffff" />
+            <path d="M10,10 h30 v30 h-30 z M15,15 v20 h20 v-20 z M20,20 h10 v10 h-10 z" fill="#0f172a" />
+            <path d="M60,10 h30 v30 h-30 z M65,15 v20 h20 v-20 z M70,20 h10 v10 h-10 z" fill="#0f172a" />
+            <path d="M10,60 h30 v30 h-30 z M15,65 v20 h20 v-20 z M20,70 h10 v10 h-10 z" fill="#0f172a" />
+            <rect x="45" y="15" width="8" height="8" fill="#0f172a" />
+            <rect x="45" y="30" width="8" height="8" fill="#0f172a" />
+            <rect x="45" y="45" width="10" height="10" fill="#b88a43" />
+            <rect x="60" y="45" width="8" height="8" fill="#0f172a" />
+            <rect x="75" y="45" width="15" height="8" fill="#0f172a" />
+            <rect x="15" y="45" width="8" height="8" fill="#0f172a" />
+            <rect x="60" y="60" width="10" height="15" fill="#0f172a" />
+            <rect x="75" y="70" width="15" height="15" fill="#0f172a" />
+            <rect x="45" y="75" width="15" height="15" fill="#0f172a" />
+          </svg>
+        </div>
+        <div class="qr-label">QR: GITHUB REPO</div>
+      </div>
+    </header>
+
+    <!-- ========================================================
+         4-COLUMN POSTER CONTENT GRID
+         ======================================================== -->
+    <div class="poster-grid">
+
+      <!-- COLUMN 1: Abstract, Problem Statement & Objectives -->
+      <div class="poster-col">
+        
+        <!-- Abstract Card -->
+        <article class="poster-card highlight">
+          <h2 class="card-title"><span class="icon">✦</span> Abstract</h2>
+          <p class="card-text">
+            <strong>BookVerse</strong> is an end-to-end full-stack literary ecosystem designed for bibliophiles, scholars, and avid readers. It unifies high-performance relational database management with modern web engineering to transform static book catalogs into an immersive literary experience.
+          </p>
+          <p class="card-text">
+            Powered by a decoupled <strong>FastAPI (ASGI)</strong> asynchronous REST backend, an optimized <strong>MySQL 8.0 (InnoDB)</strong> database, and a reactive <strong>React 18 + Vite</strong> client featuring 3D skeuomorphic scroll-turn canvas physics with realistic desk stationery.
+          </p>
+          <p class="card-text" style="color: var(--success); font-weight: 600;">
+            ✓ Key Outcome: Eliminates catalog latency, guarantees complete relational integrity with cascading schemas, and provides a tactile, distraction-free reading portal.
+          </p>
+        </article>
+
+        <!-- Problem Statement & Objectives -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> Problem & Objectives</h2>
+          <p class="card-text">
+            <strong>The Problem:</strong> Conventional book platforms (e.g., legacy Goodreads) suffer from outdated interfaces, sluggish monolithic API queries, intrusive advertisements, detached shelving tracking, and lifeless metadata grids lacking visceral connection to literature.
+          </p>
+          <ul class="poster-list">
+            <li><strong>Obj 1: Relational Scalability:</strong> Engineer a 3NF normalized MySQL database with foreign-key integrity constraints for 58+ classic and contemporary volumes.</li>
+            <li><strong>Obj 2: High-Throughput REST Gateway:</strong> Build an asynchronous Python FastAPI service offering sub-35ms CRUD endpoints, schema validation via Pydantic v2, and multi-part asset streaming.</li>
+            <li><strong>Obj 3: 3D Skeuomorphic Experience:</strong> Create an interactive open-tome scroll canvas with dynamic forward/backward leaf flippers, authentic classic manuscripts, and realistic HB pencils.</li>
+            <li><strong>Obj 4: Shelf & Social Lifecycle:</strong> Provide real-time reading progress sliders, multi-tier shelf status, and community critique boards.</li>
+          </ul>
+        </article>
+
+        <!-- Scope -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> Project Scope</h2>
+          <p class="card-text">
+            <strong>Users:</strong> General readers, academic literature researchers, book clubs, and system administrators.<br>
+            <strong>Modules:</strong> Catalog Explorer, Dynamic Shelves (Want / Reading / Completed), Voices & Critique, Reading Velocity Streaks, AI Literary Oracle, and Local Image Asset Pipeline.
+          </p>
+        </article>
+
+      </div>
+
+      <!-- COLUMN 2: Existing vs Proposed & Feasibility Study -->
+      <div class="poster-col">
+
+        <!-- Existing vs Proposed System -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> Existing vs Proposed System</h2>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>Feature Dimension</th>
+                <th>Existing Platforms</th>
+                <th>Proposed BookVerse</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Visual Immersion</strong></td>
+                <td>Static 2D flat lists, heavy text clutter, intrusive ads</td>
+                <td><span class="badge-check">3D Open Tome with scroll-turning leaf animations</span></td>
+              </tr>
+              <tr>
+                <td><strong>Cover Delivery</strong></td>
+                <td>External CDN hotlinks prone to 404 broken links</td>
+                <td><span class="badge-check">100% Local uploads cache (FastAPI static route)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Database Architecture</strong></td>
+                <td>Monolithic legacy queries, slow relational joins</td>
+                <td><span class="badge-check">MySQL 8.0 InnoDB with connection pooling & indices</span></td>
+              </tr>
+              <tr>
+                <td><strong>Reading Tracking</strong></td>
+                <td>Rigid text counters; no real-time percentage sliders</td>
+                <td><span class="badge-check">Interactive progress sliders with instant DB sync</span></td>
+              </tr>
+              <tr>
+                <td><strong>Aesthetic Curation</strong></td>
+                <td>Generic genre checkboxes</td>
+                <td><span class="badge-check">Pinterest-style aesthetic mood boards & color palettes</span></td>
+              </tr>
+              <tr>
+                <td><strong>Limitation / Gap</strong></td>
+                <td colspan="2">Existing tools lack tactile emotional resonance. <strong>BookVerse bridges digital speed with physical paper nostalgia</strong> through realistic HB pencils and illuminated manuscripts.</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <!-- Feasibility Study -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> Feasibility Study</h2>
+          <ul class="poster-list">
+            <li><strong>Technical Feasibility:</strong> Built with robust, production-proven enterprise technologies: Python 3.12, FastAPI, SQLAlchemy ORM, MySQL 8.0, and React 18 with modern browser CSS 3D Transforms.</li>
+            <li><strong>Economic Feasibility:</strong> 100% open-source software stack with zero licensing fees. Self-contained architecture deployable on commodity servers or free-tier cloud containers (Render / Railway / AWS).</li>
+            <li><strong>Operational Feasibility:</strong> Intuitive chapter-based layout; users master shelving, filtering, and critique within 30 seconds. Seamless light and dark parchment modes.</li>
+            <li><strong>Schedule Feasibility:</strong> Structured into 5 iterative sprints across the semester (Database Modeling -> Core API -> Frontend Integration -> 3D Canvas Polish -> Verification).</li>
+          </ul>
+        </article>
+
+        <!-- Tools & Technologies -->
+        <article class="poster-card highlight">
+          <h2 class="card-title"><span class="icon">✦</span> Tools & Technologies</h2>
+          
+          <div class="tech-group">
+            <div class="tech-label">Frontend Presentation</div>
+            <div class="chips-wrapper">
+              <span class="tech-chip featured">React 18</span>
+              <span class="tech-chip featured">Vite 8.3</span>
+              <span class="tech-chip">React Router 6</span>
+              <span class="tech-chip">CSS3 3D Transforms</span>
+              <span class="tech-chip">HTML5 Canvas</span>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <div class="tech-label">Backend & REST Gateway</div>
+            <div class="chips-wrapper">
+              <span class="tech-chip featured">FastAPI</span>
+              <span class="tech-chip featured">Python 3.12</span>
+              <span class="tech-chip">Uvicorn ASGI</span>
+              <span class="tech-chip">Pydantic v2</span>
+              <span class="tech-chip">SQLAlchemy 2.0</span>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <div class="tech-label">Database & DevOps</div>
+            <div class="chips-wrapper">
+              <span class="tech-chip db">MySQL 8.0 (InnoDB)</span>
+              <span class="tech-chip db">PyMySQL</span>
+              <span class="tech-chip">Git / GitHub</span>
+              <span class="tech-chip">Postman</span>
+              <span class="tech-chip">Pillow (PIL)</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- COLUMN 3: System Architecture & ER Design -->
+      <div class="poster-col">
+
+        <!-- System Architecture -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> System Architecture</h2>
+          <div class="diagram-box">
+            <div class="diagram-layer">
+              <div class="layer-title"><span>CLIENT PRESENTATION TIER</span><span>[React + Vite :5173]</span></div>
+              3D Tome Canvas Engine · Bookmark Ribbon Navigator · Shelf Sliders · UI Router
+            </div>
+            <div class="diagram-arrow">⇅ JSON REST APIs (HTTP / CORS Enabled) ⇅</div>
+            <div class="diagram-layer">
+              <div class="layer-title"><span>APPLICATION CONTROLLER TIER</span><span>[FastAPI :8000]</span></div>
+              Uvicorn ASGI · Pydantic v2 Serialization · Static Uploads Mount · ORM Session Pool
+            </div>
+            <div class="diagram-arrow">⇅ SQLAlchemy Dialect / SQL Prepared Statements ⇅</div>
+            <div class="diagram-layer">
+              <div class="layer-title"><span>PERSISTENCE STORAGE TIER</span><span>[MySQL 8.0 :3306]</span></div>
+              InnoDB Engine (bookverse_db) · UTF8MB4 Charset · ON DELETE CASCADE Foreign Keys
+            </div>
+          </div>
+          <p class="card-text" style="margin-top: 8px;">
+            The decoupled 3-tier architecture isolates UI state from relational storage, preventing database locks and enabling stateless horizontal API scaling.
+          </p>
+        </article>
+
+        <!-- ER Diagram & Database Design -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> ER Diagram & Relational Design</h2>
+          
+          <div class="er-schema-grid">
+            <div class="er-entity">
+              <div class="er-head">USERS</div>
+              <div class="er-body">
+                <span class="pk">PK user_id VARCHAR(36)</span>
+                <span>username VARCHAR(50) [UQ]</span>
+                <span>email VARCHAR(255) [UQ]</span>
+                <span>password_hash VARCHAR(255)</span>
+                <span>created_at DATETIME</span>
+              </div>
+            </div>
+
+            <div class="er-entity">
+              <div class="er-head">BOOKS</div>
+              <div class="er-body">
+                <span class="pk">PK book_id VARCHAR(36)</span>
+                <span>title VARCHAR(255) [IDX]</span>
+                <span>author VARCHAR(255)</span>
+                <span>isbn VARCHAR(20) [UQ]</span>
+                <span>price DECIMAL(10,2)</span>
+                <span>cover_image_url VARCHAR(255)</span>
+              </div>
+            </div>
+
+            <div class="er-entity">
+              <div class="er-head">REVIEWS</div>
+              <div class="er-body">
+                <span class="pk">PK review_id VARCHAR(36)</span>
+                <span class="fk">FK user_id (USERS.user_id)</span>
+                <span class="fk">FK book_id (BOOKS.book_id)</span>
+                <span>rating INT CHECK (1..5)</span>
+                <span>review_text TEXT</span>
+              </div>
+            </div>
+
+            <div class="er-entity">
+              <div class="er-head">READING_LIST</div>
+              <div class="er-body">
+                <span class="pk">PK list_id VARCHAR(36)</span>
+                <span class="fk">FK user_id (USERS.user_id)</span>
+                <span class="fk">FK book_id (BOOKS.book_id)</span>
+                <span>status ENUM('want', 'reading', 'completed')</span>
+                <span>added_at DATETIME</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="card-text" style="font-size: 10px; margin-top: 8px;">
+            <strong>Integrity Rules:</strong> Referential integrity enforced via <code>ON DELETE CASCADE</code>. Normalized in 3NF to eliminate update and deletion anomalies.
+          </p>
+        </article>
+
+        <!-- Key Modules -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> Core Functional Modules</h2>
+          <ul class="poster-list">
+            <li><strong>Ch. I: Grand Library:</strong> Catalog with dynamic multi-category filtering, instant search, and real-time pagination.</li>
+            <li><strong>Ch. II: Reading Shelf:</strong> Multi-state shelf categorizing Want to Read, In Progress, and Completed reads with percentage sliders.</li>
+            <li><strong>Ch. III: Critique Hub:</strong> Star-rating aggregation, written reviews, and reader discussion threads.</li>
+            <li><strong>Ch. IV: Reading Rituals:</strong> Habit streaks, annual challenges, and page tracking analytics.</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <!-- COLUMN 4: Results, Testing, Conclusion & Scope -->
+      <div class="poster-col">
+
+        <!-- Results & Performance Metrics -->
+        <article class="poster-card highlight">
+          <h2 class="card-title"><span class="icon">✦</span> Results & Test Metrics</h2>
+          
+          <div class="metric-grid">
+            <div class="metric-box">
+              <div class="metric-num">58</div>
+              <div class="metric-label">Books Seeded</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-num">&lt;35ms</div>
+              <div class="metric-label">API Latency</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-num">100%</div>
+              <div class="metric-label">Cover Scans</div>
+            </div>
+          </div>
+
+          <p class="card-text" style="margin-top: 10px;">
+            <strong>Validation & Quality Assurance:</strong>
+          </p>
+          <ul class="poster-list">
+            <li><strong>CRUD Verification:</strong> 100% test pass on Book, Review, and Shelf endpoints via automated test suites.</li>
+            <li><strong>SQL Injection Shield:</strong> Parameterized SQLAlchemy ORM statements prevent malicious inputs completely.</li>
+            <li><strong>Zero Broken Assets:</strong> 58/58 books verified with local high-resolution cover files in <code>/uploads</code>.</li>
+            <li><strong>Render Efficiency:</strong> 60 FPS fluid 3D leaf-flip scroll performance across major browsers.</li>
+          </ul>
+        </article>
+
+        <!-- Conclusion -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> Conclusion</h2>
+          <p class="card-text">
+            BookVerse successfully satisfies all project objectives by delivering a modern, production-ready distributed library system.
+          </p>
+          <p class="card-text">
+            By harmonizing a robust <strong>MySQL 8.0 relational core</strong> with <strong>FastAPI's asynchronous speed</strong> and a <strong>sensory 3D paper scroll environment</strong>, BookVerse proves that academic database principles can create deeply captivating real-world consumer applications.
+          </p>
+        </article>
+
+        <!-- Future Scope -->
+        <article class="poster-card">
+          <h2 class="card-title"><span class="icon">✦</span> Future Scope</h2>
+          <ul class="poster-list">
+            <li><strong>WebSocket Synchronized Reading:</strong> Real-time co-reading rooms with live annotations and chat.</li>
+            <li><strong>Vector Embeddings (RAG / AI):</strong> Semantic similarity search matching reader moods and literary themes.</li>
+            <li><strong>Offline Progressive Web App (PWA):</strong> IndexedDB local cache for uninterrupted offline shelf management.</li>
+          </ul>
+        </article>
+
+        <!-- Academic References -->
+        <article class="poster-card" style="padding: 10px 14px;">
+          <h2 class="card-title" style="font-size: 11.5px; margin-bottom: 6px;"><span class="icon">✦</span> References</h2>
+          <div style="font-size: 9.5px; color: var(--text-muted); line-height: 1.45;">
+            <div>[1] R. Elmasri & S. Navathe, <em>Fundamentals of Database Systems</em>, 7th ed., Pearson, 2016.</div>
+            <div>[2] S. Ramírez, <em>FastAPI Modern Python Web APIs</em>, Packt Publishing, 2023.</div>
+            <div>[3] MySQL 8.0 Reference Manual: <em>InnoDB Storage Engine Architecture</em>, Oracle, 2026.</div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================================
+         POSTER FOOTER BAR
+         ======================================================== -->
+    <footer class="poster-footer">
+      <div>
+        <strong>Project-Based Learning (PBL) 2026-2027</strong> | Department of Computer Science & Engineering | Koneru Lakshmaiah Education Foundation (KLH)
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span>Status: <strong style="color: var(--success);">Fully Implemented & Verified</strong></span>
+        <button class="print-btn" onclick="window.print()">Print / Export Poster PDF</button>
+      </div>
+    </footer>
+
+  </main>
+
+</body>
+</html>

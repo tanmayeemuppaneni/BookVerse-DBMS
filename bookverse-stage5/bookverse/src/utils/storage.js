@@ -1,0 +1,1 @@
+export const storage={get(key,fallback){try{const v=localStorage.getItem(`bookverse_${key}`);return v?JSON.parse(v):fallback}catch{return fallback}},set(key,value){try{localStorage.setItem(`bookverse_${key}`,JSON.stringify(value))}catch{}},remove(key){try{localStorage.removeItem(`bookverse_${key}`)}catch{}}};
